@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>All Locations - Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: #3b4a59;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: #f06292;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .locations-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .locations-list li {
+            background-color: #4a5a6a;
+            padding: 20px;
+            flex: 1 1 250px;
+            border-radius: 6px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .locations-list li:hover {
+            background-color: #5b6b7b;
+        }
+
+        .locations-list a {
+            color: #f06292;
+            font-weight: bold;
+            text-decoration: none;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .locations-list {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .locations-list li {
+                flex: 1 1 auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <a href="{% url 'a_dash' %}" class="back-button">← Back to Dashboard</a>
+
+        <h1>All Locations</h1>
+
+        <ul class="locations-list">
+            {% for loc in locations %}
+            <li>
+                <a href="{% url 'slips_by_location' loc.location %}">
+                    {{ loc.location }} ({{ loc.slips_count }} slips)
+                </a>
+            </li>
+            {% empty %}
+            <li>No locations found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</body>
+
+</html>

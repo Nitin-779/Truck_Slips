@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Slips in {{ location }} - Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background-color: #3b4a59;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: #f06292;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            border: 1px solid #555;
+            text-align: left;
+            word-break: break-word;
+        }
+
+        th {
+            background-color: #222;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #4a5a6a;
+        }
+
+        a {
+            color: #f06292;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .status {
+            text-transform: capitalize;
+            font-weight: bold;
+        }
+
+        .image-preview {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        @media (max-width: 800px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+                width: 100%;
+            }
+
+            thead tr {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 20px;
+                background-color: #4a5a6a;
+                border-radius: 6px;
+                padding: 10px;
+            }
+
+            td {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                border: none;
+                border-bottom: 1px solid #555;
+            }
+
+            td:last-child {
+                border-bottom: 0;
+            }
+
+            td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                width: 40%;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <a href="{% url 'admin_slips_locations' %}" class="back-button">← Back to Locations</a>
+
+        <h1>Slips from "{{ location }}"</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>File Name</th>
+                    <th>Uploaded At</th>
+                    <th>Status</th>
+                    <th>Preview</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for slip in slips %}
+                <tr>
+                    <td data-label="User">{{ slip.user.username }}</td>
+                    <td data-label="File Name">
+                        <a href="{{ slip.file.url }}" target="_blank">{{ slip.file_name }}</a>
+                    </td>
+                    <td data-label="Uploaded At">{{ slip.uploaded_at|date:"Y-m-d H:i" }}</td>
+                    <td data-label="Status" class="status">{{ slip.status }}</td>
+                    <td data-label="Preview">
+                        {% if slip.is_image %}
+                            <img src="{{ slip.file.url }}" alt="Image Preview" class="image-preview"/>
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td data-label="Actions">
+                        <a href="{% url 'approve_slip' slip.id %}">Approve</a> |
+                        <a href="{% url 'reject_slip' slip.id %}">Reject</a> |
+                        <a href="{% url 'delete_slip' slip.id %}" onclick="return confirm('Are you sure you want to delete this slip?');">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" style="text-align: center;">No slips found for this location.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account - FleetDocs</title>
+  <!-- <link rel="stylesheet" href="auth.css"> -->
+   <style>
+    /* General */
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          background: #fff;
+          color: #0a2b5e;
+        }
+
+        /* Navbar */
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          padding: 1rem 5%;
+          background: white;
+          border-bottom: 1px solid #eee;
+          align-items: center;
+        }
+        .logo {
+          font-size: 1.2rem;
+          font-weight: bold;
+          color: #0a2b5e;
+        }
+        .navbar a {
+          margin-left: 1rem;
+          color: #0a2b5e;
+          font-weight: 500;
+        }
+        .btn {
+          background: #0a2b5e;
+          color: white;
+          padding: 0.5rem 1rem;
+          border-radius: 8px;
+        }
+
+        /* Auth Form */
+        .auth-container {
+          display: flex;
+          justify-content: center;
+          padding: 3rem 1rem;
+        }
+        .auth-box {
+          background: white;
+          padding: 2rem;
+          border-radius: 12px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+          width: 100%;
+          max-width: 420px;
+        }
+        .auth-box h2 {
+          margin-bottom: 1rem;
+        }
+        .role-toggle {
+          margin-bottom: 0.5rem;
+        }
+        .role-toggle label {
+          margin-right: 1rem;
+        }
+        .note {
+          font-size: 0.9rem;
+          color: #555;
+          margin-bottom: 1.5rem;
+        }
+        form {
+          display: flex;
+          flex-direction: column;
+        }
+        label {
+          margin-bottom: 0.3rem;
+          font-size: 0.9rem;
+        }
+        input {
+          padding: 0.7rem;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          margin-bottom: 1rem;
+          font-size: 1rem;
+        }
+        .btn-primary {
+          background: #0a2b5e;
+          color: white;
+          padding: 0.8rem;
+          border: none;
+          border-radius: 10px;
+          font-size: 1rem;
+          font-weight: bold;
+          cursor: pointer;
+        }
+        .btn-primary:hover {
+          background: #083469;
+        }
+        .switch {
+          margin-top: 1rem;
+          font-size: 0.9rem;
+          color: #444;
+        }
+        .switch a {
+          color: #0a2b5e;
+          font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+
+  <!-- {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %} -->
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="{% url 'index_view' %}"><div class="logo">FleetDocs</div></a>
+    <nav>
+      <a href="{%url 'login' %}" >Sign In</a>
+      <!-- <a href="{% url 'signup' %}" class="btn">Create Account</a> -->
+    </nav>
+  </header>
+
+  <!-- Create Account Form -->
+  <main class="auth-container">
+    <div class="auth-box">
+      <h2>Create Account</h2>
+
+      <!-- <div class="role-toggle">
+        <label><input type="radio" name="role" checked> Driver</label>
+        <label><input type="radio" name="role"> Admin</label>
+      </div>
+      <p class="note">
+        Note: Admin access is verified by your account’s role.<br>
+        Choosing Admin only changes where you go after sign in.
+      </p> -->
+
+      <form action="{% url 'signup' %}" method="POST">
+        {% csrf_token %}
+
+        <label>Username</label>
+        <input type="text" placeholder="Username" name="username"required>
+
+        <label>Email</label>
+        <input type="email" placeholder="Enter your email" name="email"required>
+
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password" name="password" required>
+
+        <label>Confirm Password</label>
+        <input type="password" placeholder="Confirm Password" name="confirm_password" required>
+
+        <button type="submit" class="btn-primary">Create Account</button>
+      </form>
+
+      <p class="switch">Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
+    </div>
+  </main>
+</body>
+</html>

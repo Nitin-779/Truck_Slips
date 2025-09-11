@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - FleetDocs</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+
+    body {
+      background: #fff;
+      color: #222;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #0a2b5e;
+    }
+
+    .navbar nav a {
+      margin-left: 1rem;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .btn {
+      background: #0a2b5e;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: 0.2s ease;
+    }
+    .btn:hover {
+      background: #08305d;
+    }
+
+    /* Secondary button */
+    .btn-secondary {
+      background: #f4f6f9;
+      color: #0a2b5e;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    /* Auth container */
+    .auth-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 1rem;
+    }
+
+    .auth-box {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .auth-box h2 {
+      margin-bottom: 1rem;
+      color: #0a2b5e;
+    }
+
+    .role-toggle {
+      margin: 0.5rem 0 1rem 0;
+    }
+
+    .note {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 1rem;
+      line-height: 1.3rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    input {
+      margin-top: 0.3rem;
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    .btn-primary {
+      margin-top: 1.5rem;
+      padding: 0.7rem;
+      background: #0a2b5e;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .btn-primary:hover {
+      background: #08305d;
+    }
+
+    .switch {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    .switch a {
+      color: #0a2b5e;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #555;
+      padding: 1.5rem 0;
+      border-top: 1px solid #eee;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %} -->
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="{% url 'index_view' %}"><div class="logo">FleetDocs</div></a>
+    <nav>
+      <a href="{% url 'login' %}" class="btn-secondary">Sign In</a>
+      <a href="{%url 'signup' %}" class="btn">Create Account</a>
+    </nav>
+  </header>
+
+  <!-- Sign In Form -->
+  <main class="auth-container">
+    <div class="auth-box">
+      <h2>Sign In</h2>
+
+      <!-- <div class="role-toggle">
+        <label><input type="radio" name="role" checked> Driver</label>
+        <label><input type="radio" name="role"> Admin</label>
+      </div> -->
+      <!-- <p class="note">
+        Note: Admin access is verified by your account’s role.<br>
+        Choosing Admin only changes where you go after sign in.
+      </p> -->
+
+      <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <label>Username</label>
+        <input type="text" placeholder="Username" name="username" required>
+
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password" name="password" required>
+
+        <div class="mb-3">
+          <label for="role">Select Role:</label>
+            <select name="role" id="role" class="form-control" required>
+              <option value="">Choose Role</option>
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select> 
+        </div>
+
+        <button type="submit" class="btn-primary">Continue</button>
+      </form>
+
+      <p class="switch">No account? <a href="{% url 'signup' %}">Create one</a></p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 FleetDocs. All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1055 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FleetDocs</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f9fbfd;
+      color: #1d2b3a;
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #0a2b5e;
+    }
+
+    .nav-links a {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: #0a2b5e;
+      font-weight: 500;
+    }
+
+    .nav-links .btn {
+      background: #0a2b5e;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+    }
+
+    /* ✅ Stat Bar */
+    .stat-bar {
+      background: #f4f7fb;
+      border-radius: 8px;
+      padding: 0.8rem 1.2rem;
+      margin: 1rem 0 1.5rem 0;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #0a2b5e;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+/* ✅ Feature Cards */
+    .features {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .feature-card {
+      flex: 1;
+      min-width: 150px;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .feature-card i {
+      font-size: 1.5rem;
+      color: #004aad;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: #0a2b5e;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+
+    /* Hero */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3rem 5%;
+      gap: 2rem;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .hero-text h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #0a2b5e;
+    }
+
+    .hero-text p {
+      margin-bottom: 1.5rem;
+      color: #444;
+    }
+
+    .buttons {
+      margin-bottom: 1rem;
+    }
+
+    .buttons .btn {
+      background: #0a2b5e;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      margin-right: 0.5rem;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .buttons .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
+    }
+
+    .buttons .btn-outline {
+      background: white;
+      color: #0a2b5e;
+      border: 1px solid #ddd;
+    }
+
+    .features {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .hero-img {
+      flex: 1;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .hero-img img {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+   .hero-highlights {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .highlight {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      color: #0a2b5e;
+      font-weight: 600;
+    }
+
+    .highlight i {
+      font-size: 1.2rem;
+      color: #1e90ff;
+    }
+
+    .hero-stats {
+      margin-top: 2rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats .stat {
+      background: #ffffff;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      flex: 1;
+      min-width: 150px;
+    }
+
+    .hero-stats h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0a2b5e;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-stats p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    /* Upload Preview Card */
+    .upload-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 350px;
+      overflow: hidden;
+    }
+
+    .upload-card-header {
+      background: #0a2b5e;
+      color: white;
+      padding: 0.8rem;
+      font-weight: bold;
+    }
+
+    .upload-card-body {
+      padding: 1rem;
+    }
+
+    .upload-card input[type="file"] {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px dashed #ccc;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .upload-btn {
+      width: 100%;
+      padding: 0.7rem;
+      background: #f8b400;
+      border: none;
+      color: #1d2b3a;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .upload-card small {
+      display: block;
+      margin-top: 0.5rem;
+      color: #666;
+      font-size: 0.8rem;
+    }
+
+    /* Trusted Teams */
+    .trusted {
+      text-align: center;
+      padding: 2rem 5%;
+    }
+
+    .trusted h4 {
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    .logos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logos div {
+      background: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      font-weight: bold;
+      color: #0a2b5e;
+    }
+
+    /* Info Cards */
+    .info-cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 2rem 5%;
+    }
+
+    .info-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      flex: 1;
+      min-width: 220px;
+      max-width: 300px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .info-card h3 {
+      color: #0a2b5e;
+      margin-bottom: 0.5rem;
+    }
+
+    /* How it works */
+    .hiw-section {
+      background: #f6f7fa;
+      padding: 3rem 5%;
+      text-align: center;
+    }
+
+    .hiw-section h2 {
+      color: #22375a;
+      margin: 0 auto 2.1rem auto;
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      max-width: 800px;
+    }
+
+    .hiw-cards {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hiw-card {
+      width: 320px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 36px rgba(43,74,164,0.10);
+      padding: 2rem 2rem 1.3rem 2rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .hiw-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .hiw-icon {
+      background: #ffc200;
+      color: #fff;
+      width: 42px;
+      height: 42px;
+      font-weight: 700;
+      font-size: 1.4rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .hiw-card b {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #0a2b5e;
+    }
+
+    .hiw-card .desc {
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    /* Built for the road section */
+    .road-section {
+      background: #fff;
+      padding: 3rem 5%;
+      text-align: center;
+    }
+
+    .road-section h2 {
+      color: #22375a;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .road-cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .road-card {
+      background: #fff;
+      border: 1px solid #e0e6ef;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem 1rem;
+      flex: 1;
+      min-width: 150px;
+      text-align: center;
+    }
+
+    .road-card .stat {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #0a2b5e;
+      margin-bottom: 0.5rem;
+    }
+
+    .road-card .label {
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    /* What customers say section */
+    .testimonials-section {
+      background: #f9fbfd;
+      padding: 3rem 5%;
+      text-align: center;
+    }
+
+    .testimonials-section h2 {
+      color: #22375a;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .testimonials-cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      padding: 2rem;
+      flex: 1;
+      min-width: 280px;
+      max-width: 350px;
+      text-align: left;
+    }
+
+    .testimonial-card p {
+      font-style: italic;
+      color: #444;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .testimonial-card .author {
+      font-weight: bold;
+      color: #0a2b5e;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .road-cards,
+      .testimonials-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .road-card,
+      .testimonial-card {
+        width: 100%;
+        max-width: 350px;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      background: #fff;
+      padding: 3rem 5%;
+      text-align: center;
+    }
+
+    .faq-section h2 {
+      color: #22375a;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: #fff;
+      border: 1px solid #e0e6ef;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      text-align: left;
+      transition: box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .faq-question {
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1rem;
+      padding: 0.8rem 1rem;
+      margin: 0;                  /* remove bottom margin */
+      border-radius: 6px;
+      background: #f9f9f9;
+      transition: background 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: #f1f1f1;
+    }
+
+    .faq-question::after {
+      content: '+';
+      font-size: 1.5rem;
+      color: #0a2b5e;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-question::after {
+      content: '-';
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 1rem;             /* only left/right padding */
+      margin: 0;          /* tiny gap from question */
+      transition: max-height 0.35s ease ;
+      color: #555;
+      line-height: 1.4;            /* proper line spacing */
+      word-break: break-word; 
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 0.5rem 1rem 0.8rem;
+    }
+
+    /* Call to Action Section */
+    .cta-section {
+      background: #f9fbfd;
+      padding: 4rem 5% 3rem 5%;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      color: #22375a;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-section p {
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-buttons .btn {
+      background: #0a2b5e;
+      color: white;
+      padding: 0.8rem 1.8rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 0.5rem;
+      transition: transform 0.2s ease;
+    }
+
+    .cta-buttons .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .cta-buttons .btn-outline {
+      background: white;
+      color: #0a2b5e;
+      border: 1px solid #ddd;
+    }
+
+    /* Quote section from old footer */
+    .footer-quote {
+      text-align: center;
+      padding: 2rem 5%;
+      background: #f9fbfd;
+    }
+
+    .footer-quote p {
+      margin-bottom: 1rem;
+      font-style: italic;
+      color: #444;
+    }
+
+    .footer-quote .btn {
+      background: #0a2b5e;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    /* New Footer */
+    .footer-bottom {
+      background: #f9fbfd;
+      padding: 2rem 5%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      border-top: 1px solid #eee;
+      flex-wrap: wrap;
+    }
+    
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+      background: #0a2b5e;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-copyright {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    @media (max-width: 900px) {
+      .hiw-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .hiw-card {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .road-cards,
+      .testimonials-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .road-card,
+      .testimonial-card {
+        width: 100%;
+        max-width: 350px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .upload-card {
+        max-width: 100%;
+      }
+      .info-card {
+        max-width: 100%;
+      }
+    }
+
+    /* CTA Section Responsive Fix */
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) {
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    .cta-buttons .btn {
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+    }
+  }
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">FleetDocs</div>
+    <div class="nav-links">
+      {% if user.is_authenticated %}
+      <a href="#"><i class="fas fa-user-circle"></i> {{ user.username }}</a>
+      
+      
+      {% if not user.is_staff %}
+        <a href="{% url 'user_slips' %}">My Slips</a>
+      {% endif %}
+
+      {% if user.is_staff %}
+      <a href="{% url 'a_dash' %}">Admin Dashboard</a>
+      
+      {% endif %}
+      <a href="{% url 'logout' %}">Logout</a>
+      {% else %}
+      <a href="{% url 'login' %}">Sign In</a>
+      <a href="{% url 'signup' %}" class="btn">Sign Up</a>
+      {% endif %}
+    </div>
+  </nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Simple, secure truck slip uploads</h1>
+    <p>
+      FleetDocs helps drivers upload slips in seconds while giving admins a clear view 
+      of who has submitted and who hasn’t.
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <h3>10,000+</h3>
+        <p>Slips processed monthly</p>
+      </div>
+    <div class="stat">
+      <h3>500+</h3>
+      <p>Fleets onboarded</p>
+    </div>
+    <div class="stat">
+      <h3>99.9%</h3>
+      <p>Uptime guaranteed</p>
+    </div>
+</div>
+
+
+    <div class="hero-highlights">
+  <div class="highlight">
+    <i class="fa fa-truck"></i>
+    <span>Fast Slip Uploads</span>
+  </div>
+  <div class="highlight">
+    <i class="fa fa-lock"></i>
+    <span>Secure & Reliable</span>
+  </div>
+  <div class="highlight">
+    <i class="fa fa-cloud"></i>
+    <span>Cloud Storage</span>
+  </div>
+</div>
+
+
+    <!-- ✅ Stat Bar -->
+    <div class="stat-bar">
+      🚚 <strong>10,000+</strong> slips uploaded every month
+    </div>
+
+    <!-- ✅ Feature Cards -->
+    <div class="features">
+      <div class="feature-card">
+        <i class="fas fa-bolt"></i>
+        <h3>Fast Uploads</h3>
+        <p>Upload slips instantly from any device.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-eye"></i>
+        <h3>Real-Time Tracking</h3>
+        <p>Admins can monitor submissions live.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-lock"></i>
+        <h3>Secure Storage</h3>
+        <p>Encrypted cloud storage with access control.</p>
+      </div>
+    </div>
+
+    <!-- ✅ Buttons -->
+    <div class="buttons">
+      <a href="{% url 'signup' %}" class="btn">Get Started</a>
+      <a href="{% url 'login' %}" class="btn btn-outline">Sign In</a>
+    </div>
+  </div>
+
+  <div class="hero-img">
+    <img src="{% static 'images/truck.jpg' %}" alt="Truck">
+
+    <div class="upload-card">
+      <div class="upload-card-header">Upload Preview</div>
+      <div class="upload-card-body">
+        <form method="post" action="{% url 'upload' %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="file" name="slip" required>
+          <label for="location">Select Location:</label>
+          <select name="location" id="location" required style="width: 100%; padding: 0.5rem; border-radius: 6px; margin-bottom: 1rem;">
+            <option value="">-- Select Location --</option>
+            <option value="Mount Polly">Mount Polly</option>
+            <option value="Lona-Ingerbell">Lona-Ingerbell</option>
+            <option value="Basin Mine">Basin Mine</option>
+            <option value="Gibraltar Haul">Gibraltar Haul</option>
+            <option value="HVC">HVC</option>
+            <option value="ARTHON">ARTHON</option>
+            <option value="SOUTHWEST">SOUTHWEST</option>
+            <option value="BIO SOLID">BIO SOLID</option>
+            <option value="COPPER MOUNTAIN MINE">COPPER MOUNTAIN MINE</option>
+            <option value="Bio solid to Princeton">Bio solid to Princeton</option>
+            <option value="Stewart Haul">Stewart Haul</option>
+            <option value="Silica">Silica</option>
+            <option value="Delta BC">Delta BC</option>
+            <option value="Breton haul">Breton haul</option>
+            <option value="Nutri grow">Nutri grow</option>
+            <option value="CAMPBELL">CAMPBELL</option>
+            <option value="POWER PAVING">POWER PAVING</option>
+            <option value="Magnitite">Magnitite</option>
+            <option value="MAIN LAND">MAIN LAND</option>
+            <option value="PAINTED ROCK">PAINTED ROCK</option>
+            <option value="GRIT HAUL">GRIT HAUL</option>
+          </select>
+          <button type="submit" class="upload-btn">Upload</button>
+        </form>
+
+        <small>Accepted: PDF, JPG, PNG</small>
+        
+        {% if uploaded_file_url %}
+        <div style="margin-top: 1rem;">
+          <p style="color: green; font-weight: bold;">File uploaded successfully!</p>
+          {% if is_image %}
+          <img src="{{ uploaded_file_url }}" alt="Preview" style="max-width: 100%; margin-top: 0.5rem;" />
+          {% else %}
+          <p><a href="{{ uploaded_file_url }}" target="_blank">View Uploaded File</a></p>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+  </section>
+
+  <section class="trusted">
+    <h4>TRUSTED BY LOGISTICS TEAMS</h4>
+    <div class="logos">
+      <div>RoadPro</div>
+      <div>TransFast</div>
+      <div>CargoOne</div>
+      <div>HighwayX</div>
+      <div>Northbound</div>
+    </div>
+  </section>
+
+  <section class="info-cards">
+    <div class="info-card">
+      <h3>For Drivers</h3>
+      <p>Clean form, minimal steps. Upload from the road with confidence.</p>
+    </div>
+    <div class="info-card">
+      <h3>For Admins</h3>
+      <p>One dashboard to track submissions and follow up on missing slips.</p>
+    </div>
+    <div class="info-card">
+      <h3>For Teams</h3>
+      <p>Audit-friendly records with timestamps and file links.</p>
+    </div>
+  </section>
+
+  <section class="testimonials-section">
+    <h2>What customers say</h2>
+    <div class="testimonials-cards">
+      <div class="testimonial-card">
+        <p>"Our drivers send slips from the cab. Zero chasing paperwork."</p>
+        <div class="author">Ops Manager, Northbound</div>
+      </div>
+      <div class="testimonial-card">
+        <p>"Setup in a day. The admin dashboard gives us instant visibility."</p>
+        <div class="author">Fleet Lead, TransFast</div>
+      </div>
+      <div class="testimonial-card">
+        <p>"No more email attachments. Everything's organized and secure."</p>
+        <div class="author">Controller, CargoOne</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer-quote">
+    <p>“Paperwork shouldn’t slow the road.” — FleetDocs</p>
+    <a href="{% url 'signup' %}" class="btn">Get Started</a>
+  </section>
+
+  <section class="hiw-section">
+    <h2>How it works</h2>
+    <div class="hiw-cards">
+      <div class="hiw-card">
+        <span class="hiw-icon">1</span>
+        <b>Create account</b>
+        <div class="desc">Drivers and admins sign up in minutes.<br>Admins get a full overview.</div>
+      </div>
+      <div class="hiw-card">
+        <span class="hiw-icon">2</span>
+        <b>Upload slips</b>
+        <div class="desc">Drivers upload PDFs or images right from<br>their phone or desktop.</div>
+      </div>
+      <div class="hiw-card">
+        <span class="hiw-icon">3</span>
+        <b>Track & follow up</b>
+        <div class="desc">Admins see who’s submitted and who hasn’t, with timestamps.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="road-section">
+    <h2>Built for the road</h2>
+    <div class="road-cards">
+      <div class="road-card">
+        <div class="stat">99.9%</div>
+        <div class="label">Uptime</div>
+      </div>
+      <div class="road-card">
+        <div class="stat">24/7</div>
+        <div class="label">Access</div>
+      </div>
+      <div class="road-card">
+        <div class="stat">10s</div>
+        <div class="label">Avg upload</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question">
+          What file types do you support?
+        </div>
+        <div class="faq-answer">
+          PDF, JPG, and PNG up to 10MB each.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          Can admins see who hasn't uploaded?
+        </div>
+        <div class="faq-answer">
+          Yes, the admin dashboard highlights missing submissions.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          Is storage secure?
+        </div>
+        <div class="faq-answer">
+          Yes, uploads are private with role-based access enforced.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>Ready to streamline truck slips?</h2>
+    <p>
+      Create your account and start collecting slips in minutes.
+    </p>
+    <div class="cta-buttons">
+      <a href="{% url 'signup' %}" class="btn">Get Started</a>
+      <a href="{% url 'login' %}" class="btn btn-outline">I already have an account</a>
+    </div>
+  </section>
+
+  <footer class="footer-bottom">
+    <div class="footer-logo">N</div>
+    <div class="footer-copyright">© 2025 FleetDocs. All rights reserved.</div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(question => {
+  question.addEventListener('click', () => {
+    const item = question.parentElement;
+    const answer = item.querySelector('.faq-answer');
+
+    if (item.classList.contains('active')) {
+      // Close
+      item.classList.remove('active');
+      answer.style.maxHeight = null;
+    } else {
+      // Close other FAQs
+      document.querySelectorAll('.faq-item').forEach(faq => {
+        faq.classList.remove('active');
+        faq.querySelector('.faq-answer').style.maxHeight = null;
+      });
+
+      // Open this one
+      item.classList.add('active');
+      answer.style.maxHeight = answer.scrollHeight + "px";
+    }
+  });
+});
+
+  </script>
+</body>
+</html>
