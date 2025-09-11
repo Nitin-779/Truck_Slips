@@ -340,7 +340,13 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('Root'),
-    'API_KEY': os.environ.get('473432449328226'),
-    'API_SECRET': os.environ.get('mOyD2CpE4ou8gSJc8zXzHWDlx6I'),
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
+
+
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/dashboard/'   # where to go after login
+LOGOUT_REDIRECT_URL = '/login/'      # where to go after logout
