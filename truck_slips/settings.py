@@ -328,10 +328,19 @@ TEMPLATES = [
 # STATIC & MEDIA
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('Root'),
+    'API_KEY': os.environ.get('473432449328226'),
+    'API_SECRET': os.environ.get('mOyD2CpE4ou8gSJc8zXzHWDlx6I'),
+}
