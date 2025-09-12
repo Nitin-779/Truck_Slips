@@ -109,3 +109,12 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'   # where to go after login
 LOGOUT_REDIRECT_URL = '/login/'      # where to go after logout
+
+
+
+print("DEBUG CLOUDINARY ENV")
+print("CLOUD_NAME:", os.getenv("CLOUDINARY_CLOUD_NAME"))
+print("API_KEY:", os.getenv("CLOUDINARY_API_KEY"))
+print("API_SECRET:", os.getenv("CLOUDINARY_API_SECRET"))
+print("Default Storage:", DEFAULT_FILE_STORAGE)
+
