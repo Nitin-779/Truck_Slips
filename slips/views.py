@@ -13,16 +13,13 @@ from django.db.models import Count
 # Create your views here.
 
 
+from django.core.files.storage import default_storage
 from django.http import JsonResponse
-import cloudinary.uploader
 
-def test_cloudinary(request):
-    try:
-        result = cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/a3/June_odd-eyed-cat.jpg")
-        return JsonResponse({"status": "success", "url": result["secure_url"]})
-    except Exception as e:
-        return JsonResponse({"status": "error", "message": str(e)})
-
+def test_storage(request):
+    return JsonResponse({
+        "storage_backend": str(default_storage.__class__),
+    })
 
 
 def index_view(request):

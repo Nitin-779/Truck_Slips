@@ -20,7 +20,7 @@ urlpatterns=[
     path('slips/<int:slip_id>/delete/', views.delete_slip, name='delete_slip'),
     path('dashboard/slips/locations/', views.admin_location_view, name='admin_slips_locations'),
     path('dashboard/slips/location/<str:location>/', views.admin_slips_by_location_view, name='slips_by_location'),
-    path("test-cloudinary/", views.test_cloudinary),
+    path("test-storage/", views.test_storage, name="test_storage"),
 
 
 
