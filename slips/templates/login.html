@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +34,13 @@
       font-weight: bold;
       color: #0a2b5e;
     }
+
+    .navbar > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
 
     .navbar nav a {
       margin-left: 1rem;
@@ -202,7 +211,13 @@
 
   <!-- Navbar -->
   <header class="navbar">
-    <a href="{% url 'index_view' %}"><div class="logo">Nishan Holdings</div></a>
+    <a href="{% url 'index_view' %}"><div class="logo">
+      <img src="{% static 'images/logo.jpg' %}" 
+           alt="Logo" 
+           style="height: 32px; vertical-align: middle; margin-right: 8px;">
+      Nishan Holdings
+      </div>
+    </a>
     <nav>
       <!-- <a href="{% url 'login' %}" class="btn-secondary">Sign In</a> -->
       <b><a href="{%url 'signup' %}">Sign Up</a></b>
